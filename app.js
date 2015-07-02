@@ -10,7 +10,47 @@ $(document).ready( function() {
 
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
+
+
+var questionResultTemplate = 
+			'<dt>Question</dt>' +
+				'<dd class="question-text"><a href="{{qLink}}" target="_blank">{{qTitle}}</a></dd>' +
+			'<dt>Asked</dt>' +
+				'<dd class="asked-date">{{qDate}}</dd>' +
+			'<dt>Viewed</dt>' +
+				'<dd class="viewed">{{qViewCount}}</dd>' +
+			'<dt>Asker</dt>' +
+				'<dd class="asker"></dd>';
+
 var showQuestion = function(question) {
+	
+	// clone our result template code
+	var result = $('.templates .question').clone();
+
+	var data = {
+		qLink: question.link,
+		qTitle: question.title,
+		qDate: new Date(1000*question.creation_date).toString(),
+		qViewCount: question.view_count
+	};
+
+	var newHtml = Mustache.to_html(questionResultTemplate, data);
+
+	result.html(newHtml);
+
+	// set some properties related to asker
+	var asker = result.find('.asker');
+	asker.html('<p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +
+													question.owner.display_name +
+												'</a>' +
+							'</p>' +
+ 							'<p>Reputation: ' + question.owner.reputation + '</p>'
+	);
+
+	return result;
+};
+
+/*var showQuestion = function(question) {
 	
 	// clone our result template code
 	var result = $('.templates .question').clone();
@@ -40,6 +80,7 @@ var showQuestion = function(question) {
 
 	return result;
 };
+*/
 
 
 // this function takes the results object from StackOverflow
@@ -62,9 +103,9 @@ var getUnanswered = function(tags) {
 	
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = {tagged: tags,
-								site: 'stackoverflow',
-								order: 'desc',
-								sort: 'creation'};
+					site: 'stackoverflow',
+					order: 'desc',
+					sort: 'creation'};
 	
 	var result = $.ajax({
 		url: "http://api.stackexchange.com/2.2/questions/unanswered",
@@ -87,6 +128,5 @@ var getUnanswered = function(tags) {
 		$('.search-results').append(errorElem);
 	});
 };
-
 
 
