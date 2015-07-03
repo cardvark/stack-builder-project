@@ -44,3 +44,9 @@
 	background-color: #F78181;
 	padding: 1em;
 }
+
+.userIcon {
+	height: 60px;
+	width: 60px;
+	padding-right: 0.5em;
+}

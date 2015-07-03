@@ -30,11 +30,17 @@
 			<form class="inspiration-getter" onsubmit="return false;">
 				<input type="text" placeholder="e.g., jQuery" name="answerers" size="30"  required>
 				<input type="submit" value="Submit">
+				<select name="period" id="param-period" class="periodSelect">
+					<option>all_time</option>
+					<option>month</option>
+				</select>
 			</form>
 		</div>
 		<div class="results-container">
 			<div class="search-results"></div>
-			<div class="results"></div>
+			<div class="results">
+
+			</div>
 		</div>
 	</div>
 	<div class="templates hidden">
@@ -51,6 +57,30 @@
 		<div class="error">
 			<p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
 		</div>
+		<dl class="result topAnswerer">
+			<dt>User:</dt>
+				<dd>
+					<p>
+						<img src="https://www.gravatar.com/avatar/a2d818d801ce38a33807f68fdd92043a?s=128&d=identicon&r=PG" alt="userImage" class="userIcon">Name: <a href="http://stackoverflow.com/users/106224/boltclock">BoltClock</a>
+					</p>
+					<p>
+						User Type: moderator
+					</p>
+				</dd>
+			<dt>Stats:</dt>
+				<dd>
+					<p>
+						Reputation: 302051
+					</p>
+					<p>
+						Post Count: 1700
+					</p>
+					<p>
+						Score: 10209
+					</p>
+				</dd>
+		</dl>
 	</div>
+
 </body>
 </html>
